@@ -6,6 +6,6 @@ class InstallController(CementBaseController):
         label = 'install'
         stacked_on = 'base'
 
-    @expose(help='Installs dependencies from an AppImage.yml file')
+    @expose(help='Installs dependencies from an AppImage.yml file.')
     def install(self):
         self.app.log.info("Install command")
