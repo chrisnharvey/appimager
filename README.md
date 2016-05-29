@@ -1,6 +1,6 @@
 # AppImager
 
-AppImager is a CLI tool for creating and managing AppImages.
+AppImager is a CLI tool for creating and managing [AppImages](http://appimage.org/).
 
 It has the ability to manage application dependences, setup an AppDir and package that AppDir into an AppImage.
 
