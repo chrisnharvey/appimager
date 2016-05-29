@@ -8,6 +8,7 @@ It has the ability to manage application dependences, setup an AppDir and packag
 
 - cmake
 - binutils
+- docker
 - fuse
 - glibc
 - glib2
