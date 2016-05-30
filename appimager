@@ -1,12 +1,5 @@
 #!/usr/bin/env python
-from cement.core.foundation import CementApp
-from cli import base, setup, install, package
+from core import app
 
-class AppImager(CementApp):
-    class Meta:
-        label = 'appimager'
-        base_controller = 'base'
-        handlers = [base.BaseController, setup.SetupController, install.InstallController, package.PackageController]
-
-with AppImager() as app:
-    app.run()
+with app.AppImager() as cli:
+    cli.run()
