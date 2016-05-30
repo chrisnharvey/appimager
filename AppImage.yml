@@ -7,7 +7,7 @@ require:
     fuse: 2.9.6-1
     zlib: 1.2.8-4
 
-require-build:
+require_build:
     cmake: 3.5.2-2
     binutils: 2.26-4
     glibc: 2.23-4
