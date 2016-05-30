@@ -1,4 +1,4 @@
-from controllers import base
+from cli import base
 from cement.core.controller import CementBaseController, expose
 
 class PackageController(CementBaseController):
