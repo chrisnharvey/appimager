@@ -14,6 +14,7 @@ It has the ability to manage application dependences, setup an AppDir and packag
 - glib2
 - gcc
 - zlib
+- xorriso
 
 ## Building
 
