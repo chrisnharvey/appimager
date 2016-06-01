@@ -4,7 +4,7 @@ from core import data
 from cement.core.controller import CementBaseController, expose
 import os, sys
 import subprocess
-import xdgappdir
+from core import xdgappdir
 from locale import gettext as _
 
 class PackageController(CementBaseController):
