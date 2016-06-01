@@ -1,7 +1,7 @@
 *.pyc
 *.cmake
 *.a
-runtime
+runtime/runtime
 Makefile
 CMakeCache.txt
 CMakeFiles
