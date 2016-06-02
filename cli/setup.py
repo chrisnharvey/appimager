@@ -17,11 +17,19 @@ class SetupController(CementBaseController):
 
         docker = Client()
 
-        for line in docker.pull('nimbusoft/appimager', stream=True):
-            print(json.loads(line.decode('utf-8'))['status'])
+        print('Setting up environment, please wait...')
 
-        volume = os.getcwd() + ':/appimager'
+        volume = os.getcwd()
 
         container_name = data_obj.get_path_hash()
 
-        docker.create_container('nimbusoft/appimager', volumes=volume, command="/bin/bash", name=container_name)
+        docker.create_container('nimbusoft/appimager', tty=True, command="/bin/bash", name=container_name, volumes=['/mnt/appimager'],
+            host_config=docker.create_host_config(binds={
+                os.getcwd(): {
+                    'bind': '/mnt/appimager',
+                    'mode': 'rw',
+                }
+            }))
+
+        docker.start(container_name)
+        print('Setup Complete')
