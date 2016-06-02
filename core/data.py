@@ -1,4 +1,5 @@
 import os
+import hashlib
 import yaml
 
 class Data:
@@ -8,7 +9,10 @@ class Data:
     def get_out_path(self):
         return self.get_path('out')
 
-    def get_path(self, key):
+    def get_path_hash(self, key=''):
+        return hashlib.md5(self.get_path(key).encode('utf-8')).hexdigest()
+
+    def get_path(self, key=''):
         cwd = os.getcwd()
         default = cwd + "/" + key
 
