@@ -1,5 +1,5 @@
 FROM base/archlinux:latest
-MAINTAINER Max Schaefer <max@excloo.com>
+MAINTAINER Nimbusoft Ltd <opensource@nimbusoft.co.uk>
 ADD etc /etc
 CMD /bin/bash
 RUN rm -rf /etc/pacman.d/gnupg && \
