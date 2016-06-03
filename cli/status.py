@@ -6,6 +6,6 @@ class StatusController(CementBaseController):
         label = 'status'
         stacked_on = 'base'
 
-    @expose(help='Shows the status of the docker container for this environment')
+    @expose(help='Shows the status of the Docker container for this environment.')
     def status(self):
         self.app.log.info("Status command")

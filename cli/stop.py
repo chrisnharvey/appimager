@@ -6,6 +6,6 @@ class StopController(CementBaseController):
         label = 'stop'
         stacked_on = 'base'
 
-    @expose(help='Stops the docker container for this environment')
+    @expose(help='Stops the Docker container for this environment.')
     def stop(self):
         self.app.log.info("Stop command")

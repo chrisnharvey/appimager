@@ -12,7 +12,7 @@ class PackageController(CementBaseController):
         label = 'package'
         stacked_on = 'base'
 
-    @expose(help='Package AppDir into an AppImage.')
+    @expose(help='Package the AppDir into an AppImage.')
     def package(self):
         data_obj = data.Data()
         path = data_obj.get_work_path()

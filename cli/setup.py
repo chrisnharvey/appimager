@@ -10,7 +10,7 @@ class SetupController(CementBaseController):
         label = 'setup'
         stacked_on = 'base'
 
-    @expose(help='Sets up a docker container for building AppImages.')
+    @expose(help='Sets up a Docker container for this environment.')
     def setup(self):
         data_obj = data.Data()
         path = data_obj.get_work_path()

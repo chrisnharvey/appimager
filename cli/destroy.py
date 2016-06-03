@@ -6,6 +6,6 @@ class DestroyController(CementBaseController):
         label = 'destroy'
         stacked_on = 'base'
 
-    @expose(help='Destroys the docker container for this environment')
+    @expose(help='Destroys the Docker container for this environment.')
     def destroy(self):
         self.app.log.info("Destroy command")

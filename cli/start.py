@@ -6,6 +6,6 @@ class StartController(CementBaseController):
         label = 'start'
         stacked_on = 'base'
 
-    @expose(help='Starts the docker container for this environment')
+    @expose(help='Starts the Docker container for this environment.')
     def start(self):
         self.app.log.info("Start command")
