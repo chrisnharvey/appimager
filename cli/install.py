@@ -1,5 +1,6 @@
 from cli import base
 from core import data
+import os
 import sys
 from urllib.request import urlretrieve
 from cement.core.controller import CementBaseController, expose
@@ -15,6 +16,10 @@ class InstallController(CementBaseController):
         yaml = data_obj.get_yml_data()
 
         arch = data_obj.architecture()
+
+        if not os.path.exists("build"):
+            print("Creating build directory")
+            os.mkdir("build")
 
         print("Downloading app dependencies...")
 
@@ -33,6 +38,6 @@ class InstallController(CementBaseController):
                 else: # total size is unknown
                     sys.stderr.write("read %d\n" % (readsofar,))
 
-            urlretrieve(url, package + ".tar.xz", reporthook)
+            urlretrieve(url, "build/" + package + ".tar.xz", reporthook)
 
         print("Complete")
