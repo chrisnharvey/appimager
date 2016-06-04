@@ -1,6 +1,7 @@
 import os
 import hashlib
 import yaml
+import platform
 
 class Data:
     def get_work_path(self):
@@ -30,3 +31,11 @@ class Data:
         stream = open(file_path, 'r')
 
         return yaml.load(stream)
+
+    def architecture(self):
+        arch = platform.architecture()[0]
+
+        if arch == '64bit':
+            return 'x86_64'
+
+        return 'i686'
