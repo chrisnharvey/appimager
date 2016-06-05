@@ -63,11 +63,11 @@ mark_as_advanced(GLIB_INCLUDE_DIR GLIB_CONFIG_INCLUDE_DIR GLIB_INCLUDE_DIRS GLIB
 
 # End find glib
 
-INCLUDE_DIRECTORIES(. ${GLIB_INCLUDE_DIRS})
+INCLUDE_DIRECTORIES(. elf ${GLIB_INCLUDE_DIRS})
 
-ADD_LIBRARY(fuseiso fuseiso.c)
-ADD_LIBRARY(isofs isofs.c)
+ADD_LIBRARY(fuseiso elf/fuseiso.c)
+ADD_LIBRARY(isofs elf/isofs.c)
 
-ADD_EXECUTABLE(runtime runtime.c)
+ADD_EXECUTABLE(runtime elf/runtime.c)
 TARGET_LINK_LIBRARIES(runtime fuseiso isofs ${LIBFUSE} ${LIBPTHREAD} ${LIBGLIB2} ${LIBZ})
 add_custom_command(TARGET runtime POST_BUILD COMMAND ${CMAKE_STRIP} runtime)
