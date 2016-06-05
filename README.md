@@ -10,7 +10,11 @@ It has the ability to manage application dependences, setup an AppDir and packag
 
 AppImager is designed to help with this. It creates a Docker container with an Arch Linux base system where you can download any version of a dependency you need for your app, and extract it into your AppDir.
 
-We do this by using am AppImage.yaml file to specify the dependencies required to compile the app, and the dependencies required to run it.
+We do this by using an AppImage.yaml file to specify the dependencies required to compile the app, and the dependencies required to run it. AppImager then reads this YAML file, downloads and decompresses the dependencies into the AppDir, then compiles and packages your app into an AppImage.
+
+The goal is to be able to add one AppImage.yml file to your source code, then use AppImager to build your app into an AppImage with no additional work required and no complicated scripts to be written.
+
+Below is an example of an AppImage.yml file.
 
 ```yaml
 name: AppImager
@@ -30,7 +34,9 @@ require_build:
     gcc: 6.1.1-1
 ```
 
-## Dependencies
+## Building
+
+### Dependencies
 
 - cmake
 - binutils
@@ -42,7 +48,7 @@ require_build:
 - zlib
 - xorriso
 
-## Building
+### Building
 
 ```bash
 sudo yum install cmake binutils docker fuse glibc-devel glib2-devel gcc zlib xorriso # Fedora 23
