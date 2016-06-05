@@ -19,6 +19,7 @@ It has the ability to manage application dependences, setup an AppDir and packag
 ## Building
 
 ```bash
+sudo yum install cmake binutils docker fuse glibc-devel glib2-devel gcc zlib xorriso # Fedora 23
 cmake .
 make clean
 make
