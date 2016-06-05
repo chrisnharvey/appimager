@@ -38,6 +38,6 @@ class InstallController(CementBaseController):
                 else: # total size is unknown
                     sys.stderr.write("read %d\n" % (readsofar,))
 
-            urlretrieve(url, "build/" + package + ".tar.xz", reporthook)
+            urlretrieve(url, "build/" + package + "-" + version + "-" + arch + ".tar.xz", reporthook)
 
         print("Complete")
