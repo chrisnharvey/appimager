@@ -1,4 +1,6 @@
 from cli import base
+from core import data
+from docker import Client
 from cement.core.controller import CementBaseController, expose
 
 class DestroyController(CementBaseController):
@@ -8,4 +10,13 @@ class DestroyController(CementBaseController):
 
     @expose(help='Destroys the Docker container for this environment.')
     def destroy(self):
-        self.app.log.info("Destroy command")
+        data_obj = data.Data()
+        container_name = data_obj.get_path_hash()
+
+        docker = Client()
+
+        print('Destroying container...')
+
+        docker.remove_container(container_name)
+
+        print("Container destroyed")
