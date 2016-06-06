@@ -2,6 +2,7 @@ from cli import base
 from core import data
 import os
 import sys
+import tarfile
 from urllib.request import urlretrieve
 from cement.core.controller import CementBaseController, expose
 
@@ -38,6 +39,26 @@ class InstallController(CementBaseController):
                 else: # total size is unknown
                     sys.stderr.write("read %d\n" % (readsofar,))
 
-            urlretrieve(url, "build/" + package + "-" + version + "-" + arch + ".tar.xz", reporthook)
+            filename = package + "-" + version + "-" + arch + ".tar.xz"
+
+            urlretrieve(url, "build/" + filename, reporthook)
+
+            print('Decompressing ' + filename)
+
+            tar = tarfile.open('build/' + filename, "r:xz")
+            tar.extractall("build")
+            tar.close()
+
+            print('Deleting ' + filename)
+            os.remove('build/' + filename)
+
+        print('Deleting .BUILDINFO')
+        os.remove('build/.BUILDINFO')
+
+        print('Deleting .MTREE')
+        os.remove('build/.MTREE')
+
+        print('Deleting .PKGINFO')
+        os.remove('build/.PKGINFO')
 
         print("Complete")
