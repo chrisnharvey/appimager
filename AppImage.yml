@@ -3,13 +3,15 @@ description: AppImager manages AppImage dependencies, assists in the creation of
 
 build: cmake . && make clean && make
 
+base: 12.04
+
 require:
-    fuse: 2.9.6-1
-    zlib: 1.2.8-4
+    - fuse
+    - zlib
 
 require_build:
-    cmake: 3.5.2-2
-    binutils: 2.26-4
-    glibc: 2.23-4
-    glib2: 2.48.1-1
-    gcc: 6.1.1-1
+    - cmake
+    - binutils
+    - glibc
+    - glib2
+    - gcc
