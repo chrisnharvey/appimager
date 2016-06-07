@@ -15,6 +15,10 @@ class DestroyController(CementBaseController):
 
         docker = Client()
 
+        print('Stopping container...')
+
+        docker.stop(container_name)
+
         print('Destroying container...')
 
         docker.remove_container(container_name)
