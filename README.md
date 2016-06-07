@@ -1,6 +1,6 @@
 # AppImager
 
-*Note: AppImager is a work in progress. All contributions and suggestions are much appreciated*
+*Note: AppImager is a work in progress. All contributions and suggestions are much appreciated.*
 
 AppImager is a CLI tool for creating and managing [AppImages](http://appimage.org/).
 
