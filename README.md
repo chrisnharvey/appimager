@@ -38,7 +38,7 @@ require_build:
     - gcc
 ```
 
-## How does it work?
+## AppImage.yml
 
 AppImager works from an AppImage.yml file. This file tells AppImager numerous things about your app and the environment you want to compile it in.
 
@@ -68,7 +68,7 @@ This is a list of dependencies that will be included in your AppImage. This shou
 
 ### require_build
 
-This is a list of dependencies that are required to build/compile your app (e.g. gcc), but are not needed once your app is compiled and packaged. 
+This is a list of dependencies that are required to build/compile your app (e.g. gcc), but are not needed once your app is compiled and packaged.
 
 ## Building
 
