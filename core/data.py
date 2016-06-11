@@ -32,6 +32,11 @@ class Data:
 
         return yaml.load(stream)
 
+    def get_deps(self):
+        yml = self.get_yml_data()
+
+        return yml['require']
+
     def get_build_deps(self):
         yml = self.get_yml_data()
 
