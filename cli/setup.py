@@ -40,6 +40,24 @@ class SetupController(CementBaseController):
         print('Starting container...')
         docker.start(container_name)
 
+        print('Updating APT repositories...')
+        cmd = docker.exec_create(container_name, "apt-get update")
+        cmd_id = cmd['Id']
+
+        for line in docker.exec_start(cmd_id, stream=True):
+            print(line.decode('ascii'), end="")
+
         print('Installing build dependencies...')
+
+        build_deps = ""
+
+        for dep in data_obj.get_build_deps():
+            build_deps = build_deps + " " + dep
+
+        cmd = docker.exec_create(container_name, "apt-get install -y " + build_deps)
+        cmd_id = cmd['Id']
+
+        for line in docker.exec_start(cmd_id, stream=True):
+            print(line.decode('ascii'), end="")
 
         print('Setup Complete')
