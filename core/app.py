@@ -1,5 +1,5 @@
 from cement.core.foundation import CementApp
-from cli import base, setup, start, stop, destroy, status, install, package
+from cli import base, setup, start, stop, destroy, status, install, build, package
 
 class AppImager(CementApp):
     class Meta:
@@ -13,5 +13,6 @@ class AppImager(CementApp):
             destroy.DestroyController,
             status.StatusController,
             install.InstallController,
+            build.BuildController,
             package.PackageController
         ]
