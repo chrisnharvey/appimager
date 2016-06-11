@@ -95,7 +95,7 @@ make
 
 ## Usage
 
-Once you have compiled the runtime binary, you can then start using AppImager.
+Once you have compiled the runtime binary, you can then start using AppImager. Most of the AppImager commands are based around your current working directory (we call this the environment). Your working directroy should be the directory which contains your AppImage.yml file.
 
 ### setup
 
@@ -111,4 +111,44 @@ The ```install``` command reads the AppImage.yml file in the current working dir
 
 ```bash
 ./appimager install
+```
+
+### start
+
+The ```start``` command starts the container for the current environment.
+
+```bash
+./appimager start
+```
+
+### stop
+
+The ```stop``` command stops the container for the current environment.
+
+```bash
+./appimager stop
+```
+
+### status
+
+The ```status``` command shows the current status of the container for this environment.
+
+```bash
+./appimager status
+```
+
+### package
+
+The ```package``` command packages the AppDir (build directory) into an AppImage, ready for distribution.
+
+```bash
+./appimager package
+```
+
+### destroy
+
+The ```destroy``` commnad stops and destroys/deletes the container for this environment.
+
+```bash
+./appimager destroy
 ```
