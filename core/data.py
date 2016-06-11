@@ -32,6 +32,11 @@ class Data:
 
         return yaml.load(stream)
 
+    def get_build_deps(self):
+        yml = self.get_yml_data()
+
+        return yml['require_build']
+
     def architecture(self):
         arch = platform.architecture()[0]
 
