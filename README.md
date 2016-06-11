@@ -54,6 +54,8 @@ The description of your app.
 
 This is the command that is run to compile your app. Usually this will be the path to a bash script which compiles your app.
 
+The command/script specified here will be called when running ```./appimager build```. It should compile your app into the ```build``` directory.
+
 ### base
 
 The base Ubuntu version you want to target. To support a larger number of systems and distros then we recommend setting this to the oldest currently supported version of Ubuntu (12.04 at the time of writing).
@@ -112,6 +114,10 @@ The ```install``` command reads the AppImage.yml file in the current working dir
 ```bash
 ./appimager install
 ```
+
+### build
+
+The ```build``` command runs the build command/script specified in your AppImage.yml file.
 
 ### start
 
