@@ -7,11 +7,11 @@ base: 12.04
 
 require:
     - fuse
-    - zlib
+    - zlib1g
 
 require_build:
     - cmake
     - binutils
-    - glibc
-    - glib2
+    - libc6
+    - glib2.0
     - gcc
