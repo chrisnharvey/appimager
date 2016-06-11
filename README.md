@@ -60,7 +60,7 @@ The base Ubuntu version you want to target. To support a larger number of system
 
 We use Ubuntu as our base as it has multiple supported versions available, which gives you the flexibility of either supporting many systems, or using the latest libraries.
 
-Although we use Ubuntu, the compiled apps you create will work on almost any relatively recent Linux distribution.
+Although we use Ubuntu for our build environment, the compiled apps you create will work on almost any relatively recent Linux distribution.
 
 ### require
 
