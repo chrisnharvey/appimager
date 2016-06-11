@@ -1,8 +1,10 @@
 from cli import base
 from core import data
+import shutil
 import os
 import sys
 import tarfile
+from docker import Client
 from urllib.request import urlretrieve
 from cement.core.controller import CementBaseController, expose
 
@@ -14,51 +16,35 @@ class InstallController(CementBaseController):
     @expose(help='Installs dependencies from an AppImage.yml file.')
     def install(self):
         data_obj = data.Data()
-        yaml = data_obj.get_yml_data()
-
-        arch = data_obj.architecture()
+        docker = Client()
 
         if not os.path.exists("build"):
             print("Creating build directory")
             os.mkdir("build")
 
+        container_name = data_obj.get_path_hash()
+
         print("Downloading app dependencies...")
 
-        for package, version in yaml['require'].items():
-            url = "https://archive.archlinux.org/packages/" + package[0] + "/" + package + "/" + package + "-" + version + "-" + arch + ".pkg.tar.xz"
+        deps = ""
 
-            def reporthook(blocknum, blocksize, totalsize):
-                readsofar = blocknum * blocksize
-                if totalsize > 0:
-                    percent = readsofar * 1e2 / totalsize
-                    s = "\rDownloading " + package + " (" + version + ") %5.1f%% %*d / %dK" % (
-                        percent, len(str(totalsize)), readsofar / 1024, totalsize / 1024)
-                    sys.stderr.write(s)
-                    if readsofar >= totalsize: # near the end
-                        sys.stderr.write("\n")
-                else: # total size is unknown
-                    sys.stderr.write("read %d\n" % (readsofar,))
+        for dep in data_obj.get_deps():
+            deps = deps + " " + dep
 
-            filename = package + "-" + version + "-" + arch + ".tar.xz"
+        cmd = docker.exec_create(container_name, '/bin/sh -c "rm -rf /tmp/debs && mkdir /tmp/debs && cd /tmp/debs && apt-get download ' + deps + '"')
 
-            urlretrieve(url, "build/" + filename, reporthook)
+        for line in docker.exec_start(cmd['Id'], stream=True):
+            print(line.decode('ascii'), end="")
 
-            print('Decompressing ' + filename)
+        print('Decompressing dependencies...')
 
-            tar = tarfile.open('build/' + filename, "r:xz")
-            tar.extractall("build")
-            tar.close()
+        cmd = docker.exec_create(container_name, '/bin/sh -c "ls -1 /tmp/debs | while read line ; do dpkg-deb -R /tmp/debs/$line /mnt/appimager/build ; done"')
+        docker.exec_start(cmd['Id'])
 
-            print('Deleting ' + filename)
-            os.remove('build/' + filename)
+        print('Configuring permissions...')
+        cmd = docker.exec_create(container_name, '/bin/sh -c "chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build"')
+        docker.exec_start(cmd['Id'])
 
-        print('Deleting .BUILDINFO')
-        os.remove('build/.BUILDINFO')
-
-        print('Deleting .MTREE')
-        os.remove('build/.MTREE')
-
-        print('Deleting .PKGINFO')
-        os.remove('build/.PKGINFO')
+        shutil.rmtree('build/DEBIAN')
 
         print("Complete")
