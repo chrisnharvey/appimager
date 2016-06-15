@@ -119,6 +119,10 @@ The ```install``` command reads the AppImage.yml file in the current working dir
 
 The ```build``` command runs the build command/script specified in your AppImage.yml file.
 
+```bash
+./appimager build
+```
+
 ### start
 
 The ```start``` command starts the container for the current environment.
