@@ -13,7 +13,6 @@ class SetupController(CementBaseController):
     @expose(help='Sets up a Docker container for this environment.')
     def setup(self):
         data_obj = data.Data()
-        path = data_obj.get_work_path()
         yml = data_obj.get_yml_data()
 
         docker = Client()
