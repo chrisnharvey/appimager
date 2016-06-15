@@ -1,7 +1,7 @@
 name: AppImager
 description: AppImager manages AppImage dependencies, assists in the creation of AppDir's and creates AppImages from source code
 
-build: cmake . && make clean && make
+build: ./build.sh
 
 base: 12.04
 
