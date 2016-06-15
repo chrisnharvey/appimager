@@ -35,12 +35,22 @@ class Data:
     def get_deps(self):
         yml = self.get_yml_data()
 
-        return yml['require']
+        deps = yml['require']
+
+        if deps == None:
+            return []
+
+        return deps
 
     def get_build_deps(self):
         yml = self.get_yml_data()
 
-        return yml['require_build']
+        deps = yml['require_build']
+
+        if deps == None:
+            return []
+
+        return deps
 
     def architecture(self):
         arch = platform.architecture()[0]
