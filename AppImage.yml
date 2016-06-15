@@ -6,10 +6,11 @@ build: cmake . && make clean && make
 base: 12.04
 
 require:
-    - fuse
     - zlib1g
 
 require_build:
+    - libfuse-dev
+    - make
     - cmake
     - binutils
     - libc6
