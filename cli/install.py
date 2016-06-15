@@ -16,11 +16,12 @@ class InstallController(CementBaseController):
     @expose(help='Installs dependencies from an AppImage.yml file.')
     def install(self):
         data_obj = data.Data()
+        build_path = data_obj.get_build_path()
         docker = Client()
 
-        if not os.path.exists("build"):
+        if not os.path.exists(build_path):
             print("Creating build directory")
-            os.mkdir("build")
+            os.mkdir(build_path)
 
         container_name = data_obj.get_path_hash()
 
