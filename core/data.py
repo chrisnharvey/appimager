@@ -4,8 +4,8 @@ import yaml
 import platform
 
 class Data:
-    def get_work_path(self):
-        return self.get_path('work')
+    def get_build_path(self):
+        return self.get_path('build')
 
     def get_out_path(self):
         return self.get_path('out')
