@@ -29,7 +29,7 @@ class SetupController(CementBaseController):
 
         print('Creating container...')
         docker.create_container('ubuntu:' + str(base_os_version), tty=True, command="/bin/bash", name=container_name, volumes=['/mnt/appimager'],
-            host_config=docker.create_host_config(binds={
+            host_config=docker.create_host_config(privileged=True, cap_add=['SYS_ADMIN'], binds={
                 os.getcwd(): {
                     'bind': '/mnt/appimager',
                     'mode': 'rw',
