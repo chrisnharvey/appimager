@@ -6,6 +6,7 @@ build: cmake . && make clean && make
 base: 12.04
 
 require:
+    - xorriso
     - zlib1g
 
 require_build:
