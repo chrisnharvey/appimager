@@ -39,7 +39,7 @@ class PackageController(CementBaseController):
             iconfile = H.get_icon_path_by_icon_name(H.get_icon_name_from_desktop_file(H.desktopfile))
             if iconfile == None:
                 print("Icon could not be found based on information in desktop file")
-                #exit(1)
+                exit(1)
 
             print("Creating %s..." % (destinationfile))
             if os.path.exists(destinationfile):
