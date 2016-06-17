@@ -4,4 +4,4 @@ cmake .
 make clean
 make
 
-mv ./runtime build/ruuntime
+mv ./runtime build/runtime
