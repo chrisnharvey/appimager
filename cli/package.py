@@ -57,7 +57,7 @@ class PackageController(CementBaseController):
             print("ok")
 
         print("Embedding runtime...")
-        elf = os.path.realpath(os.path.dirname(__file__)) + "/runtime"
+        elf = os.path.realpath(os.path.dirname(__file__)) + "/../build/runtime"
         s = open(elf, 'rb')
         f = open(destinationfile, 'rb+')
         f.write(bytes(s.read()))
