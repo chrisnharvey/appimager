@@ -15,7 +15,7 @@ class PackageController(CementBaseController):
     @expose(help='Package the AppDir into an AppImage.')
     def package(self):
         data_obj = data.Data()
-        path = data_obj.get_work_path()
+        path = data_obj.get_build_path()
 
         # Also search for dependency binaries and libraries next to myself
         dependenciesdir = path + "/usr/"
@@ -31,7 +31,7 @@ class PackageController(CementBaseController):
 
         if should_compress == True:
             if not os.path.exists(sourcedir):
-                print("Application work directory not found: %s" % (sourcedir))
+                print("Application build directory not found: %s" % (sourcedir))
                 exit(1)
 
         if should_compress == True:
