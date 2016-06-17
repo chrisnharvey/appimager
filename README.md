@@ -68,9 +68,13 @@ Although we use Ubuntu for our build environment, the compiled apps you create w
 
 This is a list of dependencies that will be included in your AppImage. This should be a list of packages that are assumed to **not** be included on every system you want to target.
 
+*Note: Dependencies for these packages will not be resolved automatically, so you will need to include all dependencies to be included in your AppImage*
+
 ### require_build
 
 This is a list of dependencies that are required to build/compile your app (e.g. gcc), but are not needed once your app is compiled and packaged.
+
+*Note: These packages are installed directly into the container using apt-get. Dependencies for these packages will be resolved automatically.*
 
 ## Building
 
