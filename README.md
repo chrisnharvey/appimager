@@ -66,7 +66,7 @@ Although we use Ubuntu for our build environment, the compiled apps you create w
 
 ### require
 
-This is a list of dependencies that will be included in your AppImage. This should be a list of packages that are assumed to **not** be included on every system you want to targer.
+This is a list of dependencies that will be included in your AppImage. This should be a list of packages that are assumed to **not** be included on every system you want to target.
 
 ### require_build
 
