@@ -1,6 +1,6 @@
 from cli import base
 from docker import Client
-from core import data
+from core import data, container
 from cement.core.controller import CementBaseController, expose
 
 class StartController(CementBaseController):
@@ -13,10 +13,10 @@ class StartController(CementBaseController):
         data_obj = data.Data()
         container_name = data_obj.get_path_hash()
 
-        docker = Client()
+        docker = container.Container(container_name)
 
         print('Starting container...')
 
-        docker.start(container_name)
+        docker.start()
 
         print("Container started")

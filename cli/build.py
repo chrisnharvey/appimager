@@ -1,6 +1,6 @@
 import os
 from docker import Client
-from core import data
+from core import data, container
 from cement.core.controller import CementBaseController, expose
 
 class BuildController(CementBaseController):
@@ -12,16 +12,11 @@ class BuildController(CementBaseController):
     def build(self):
         data_obj = data.Data()
         container_name = data_obj.get_path_hash()
+        container_obj = container.Container(container_name)
         yml_data = data_obj.get_yml_data()
 
-        docker = Client()
-
-        cmd = docker.exec_create(container_name, 'sh -c "cd /mnt/appimager && ' + yml_data['build'] + '"')
-        cmd_id = cmd['Id']
-
-        for line in docker.exec_start(cmd_id, stream=True):
-            print(line.decode('ascii'), end="")
+        for line in container_obj.execute('cd /mnt/appimager && ' + yml_data['build']):
+            print(line, end="")
 
         print('Configuring permissions...')
-        cmd = docker.exec_create(container_name, '/bin/sh -c "chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build"')
-        docker.exec_start(cmd['Id'])
+        container_obj.execute('chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build')

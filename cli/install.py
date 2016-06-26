@@ -1,5 +1,5 @@
 from cli import base
-from core import data
+from core import data, container
 import shutil
 import os
 import sys
@@ -24,6 +24,7 @@ class InstallController(CementBaseController):
             os.mkdir(build_path)
 
         container_name = data_obj.get_path_hash()
+        container_obj = container.Container(container_name)
 
         print("Downloading app dependencies...")
 
@@ -32,19 +33,15 @@ class InstallController(CementBaseController):
         for dep in data_obj.get_deps():
             deps = deps + " " + dep
 
-        cmd = docker.exec_create(container_name, '/bin/sh -c "rm -rf /tmp/debs && mkdir /tmp/debs && cd /tmp/debs && apt-get download ' + deps + '"')
-
-        for line in docker.exec_start(cmd['Id'], stream=True):
-            print(line.decode('ascii'), end="")
+        for line in container_obj.execute('rm -rf /tmp/debs && mkdir /tmp/debs && cd /tmp/debs && apt-get download ' + deps):
+            print(line, end="")
 
         print('Decompressing dependencies...')
 
-        cmd = docker.exec_create(container_name, '/bin/sh -c "ls -1 /tmp/debs | while read line ; do dpkg-deb -R /tmp/debs/$line /mnt/appimager/build ; done"')
-        docker.exec_start(cmd['Id'])
+        container_obj.execute('ls -1 /tmp/debs | while read line ; do dpkg-deb -R /tmp/debs/$line /mnt/appimager/build ; done')
 
         print('Configuring permissions...')
-        cmd = docker.exec_create(container_name, '/bin/sh -c "chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build"')
-        docker.exec_start(cmd['Id'])
+        container_obj.execute('chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build')
 
         shutil.rmtree('build/DEBIAN')
 
