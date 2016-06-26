@@ -1,5 +1,5 @@
 from cli import base
-from core import data
+from core import data, container
 from docker import Client
 from cement.core.controller import CementBaseController, expose
 import json
@@ -24,6 +24,8 @@ class SetupController(CementBaseController):
         base_os_version = yml['base']
         container_name = data_obj.get_path_hash()
 
+        container_obj = container.Container(container_name)
+
         print('Pulling Ubuntu ' + str(base_os_version) + '...')
         docker.pull('ubuntu', str(base_os_version))
 
@@ -37,14 +39,26 @@ class SetupController(CementBaseController):
             }))
 
         print('Starting container...')
-        docker.start(container_name)
+        container_obj.start()
 
         print('Updating APT repositories...')
-        cmd = docker.exec_create(container_name, "apt-get update")
-        cmd_id = cmd['Id']
 
-        for line in docker.exec_start(cmd_id, stream=True):
-            print(line.decode('ascii'), end="")
+        for line in container_obj.execute("apt-get update"):
+            print(line, end="")
+
+        print('Installing common dependencies...')
+        for line in container_obj.execute('apt-get -y install software-properties-common python-software-properties'):
+            print(line, end="")
+
+        print('Adding additional APT repositories...')
+        for repo in data_obj.get_repositories():
+            for line in container_obj.execute('add-apt-repository -y ' + repo):
+                print(line, end="")
+
+        print('Updating APT repositories...')
+
+        for line in container_obj.execute("apt-get update"):
+            print(line, end="")
 
         print('Installing build dependencies...')
 
@@ -53,10 +67,7 @@ class SetupController(CementBaseController):
         for dep in data_obj.get_build_deps():
             build_deps = build_deps + " " + dep
 
-        cmd = docker.exec_create(container_name, "apt-get install -y " + build_deps)
-        cmd_id = cmd['Id']
-
-        for line in docker.exec_start(cmd_id, stream=True):
-            print(line.decode('ascii'), end="")
+        for line in container_obj.execute("apt-get install -y " + build_deps):
+            print(line, end="")
 
         print('Setup Complete')
