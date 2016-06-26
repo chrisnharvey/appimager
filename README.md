@@ -26,6 +26,13 @@ build: cmake . && make clean && make
 
 base: 12.04
 
+env:
+    MY_ENV_VAR: environment variable
+
+repositories:
+    - "ppa:ubuntu-toolchain-r/test"
+    - "deb http://gb.archive.ubuntu.com/ubuntu/ precise universe multiverse"
+
 require:
     - fuse
     - zlib
