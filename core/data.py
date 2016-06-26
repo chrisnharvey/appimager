@@ -35,6 +35,9 @@ class Data:
     def get_deps(self):
         yml = self.get_yml_data()
 
+        if not hasattr(yml, 'require'):
+            return []
+
         deps = yml['require']
 
         if deps == None:
@@ -44,6 +47,9 @@ class Data:
 
     def get_build_deps(self):
         yml = self.get_yml_data()
+
+        if not hasattr(yml, 'require_build'):
+            return []
 
         deps = yml['require_build']
 
