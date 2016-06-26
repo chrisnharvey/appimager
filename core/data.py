@@ -68,7 +68,8 @@ class Data:
             'PYTHONPATH': '/mnt/appimager/build/share/pyshared:$PYTHONPATH',
             'XDG_DATA_DIRS': '/mnt/appimager/build/:$XDG_DATA_DIRS',
             'QT_PLUGIN_PATH': '/mnt/appimager/build/lib/qt4/plugins:/mnt/appimager/build/lib/qt5/plugins:$QT_PLUGIN_PATH',
-            'PERLLIB': '/mnt/appimager/build/share/perl5:/mnt/appimager/build/lib/perl5:$PERLLIB'
+            'PERLLIB': '/mnt/appimager/build/share/perl5:/mnt/appimager/build/lib/perl5:$PERLLIB',
+            'GSETTINGS_SCHEMA_DIR': '/mnt/appimager/build/share/glib-2.0/schemas:$GSETTINGS_SCHEMA_DIR'
         }
 
         if not hasattr(yml, 'env'):
