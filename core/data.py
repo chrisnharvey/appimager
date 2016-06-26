@@ -45,6 +45,19 @@ class Data:
 
         return deps
 
+    def get_repositories(self):
+        yml = self.get_yml_data()
+
+        if not 'repositories' in yml:
+            return []
+
+        repos = yml['repositories']
+
+        if repos == None:
+            return []
+
+        return repos
+
     def get_build_deps(self):
         yml = self.get_yml_data()
 
