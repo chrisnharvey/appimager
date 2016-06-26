@@ -58,6 +58,43 @@ class Data:
 
         return deps
 
+    def get_env_vars(self):
+        yml = self.get_yml_data()
+
+        default_env = {
+            'LD_LIBRARY_PATH': '/mnt/appimager/build/lib:/mnt/appimager/build/lib32:/mnt/appimager/build/lib64:/mnt/appimager/build/lib/i386-linux-gnu:/mnt/appimager/build/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH',
+            'PATH': '/mnt/appimager/build/bin:$PATH',
+            'PKG_CONFIG_PATH': '/mnt/appimager/build/lib/pkgconfig:$PKG_CONFIG_PATH',
+            'PYTHONPATH': '/mnt/appimager/build/share/pyshared:$PYTHONPATH',
+            'XDG_DATA_DIRS': '/mnt/appimager/build/:$XDG_DATA_DIRS',
+            'QT_PLUGIN_PATH': '/mnt/appimager/build/lib/qt4/plugins:/mnt/appimager/build/lib/qt5/plugins:$QT_PLUGIN_PATH',
+            'PERLLIB': '/mnt/appimager/build/share/perl5:/mnt/appimager/build/lib/perl5:$PERLLIB'
+        }
+
+        if not hasattr(yml, 'env'):
+            return default_env
+
+        env = yml['env']
+
+        if env == None:
+            return default_env
+
+        for var, value in env:
+            if not hasattr(default_env, var):
+                env_vars[var] = value
+            else:
+                env_vars[var] = default_env[var] + ':' + value
+
+        return env_vars
+
+    def get_env_vars_string(self):
+        env_string = ''
+
+        for env, value in self.get_env_vars().items():
+            env_string = env_string + "; " + env + '="' + value + '"'
+
+        return env_string.strip('; ')
+
     def architecture(self):
         arch = platform.architecture()[0]
 
