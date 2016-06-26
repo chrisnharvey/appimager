@@ -35,7 +35,7 @@ class Data:
     def get_deps(self):
         yml = self.get_yml_data()
 
-        if not hasattr(yml, 'require'):
+        if not 'require' in yml:
             return []
 
         deps = yml['require']
@@ -48,7 +48,7 @@ class Data:
     def get_build_deps(self):
         yml = self.get_yml_data()
 
-        if not hasattr(yml, 'require_build'):
+        if not 'require_build' in yml:
             return []
 
         deps = yml['require_build']
@@ -72,7 +72,7 @@ class Data:
             'GSETTINGS_SCHEMA_DIR': '/mnt/appimager/build/share/glib-2.0/schemas:$GSETTINGS_SCHEMA_DIR'
         }
 
-        if not hasattr(yml, 'env'):
+        if not 'env' in yml:
             return default_env
 
         env = yml['env']
@@ -81,7 +81,7 @@ class Data:
             return default_env
 
         for var, value in env:
-            if not hasattr(default_env, var):
+            if not var in default_env:
                 env_vars[var] = value
             else:
                 env_vars[var] = default_env[var] + ':' + value
