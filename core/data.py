@@ -75,14 +75,14 @@ class Data:
         yml = self.get_yml_data()
 
         default_env = {
-            'LD_LIBRARY_PATH': '/mnt/appimager/build/lib:/mnt/appimager/build/lib32:/mnt/appimager/build/lib64:/mnt/appimager/build/lib/i386-linux-gnu:/mnt/appimager/build/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH',
-            'PATH': '/mnt/appimager/build/bin:$PATH',
-            'PKG_CONFIG_PATH': '/mnt/appimager/build/lib/pkgconfig:$PKG_CONFIG_PATH',
-            'PYTHONPATH': '/mnt/appimager/build/share/pyshared:$PYTHONPATH',
+            'LD_LIBRARY_PATH': '/mnt/appimager/build/lib/:/mnt/appimager/build/lib32/:/mnt/appimager/build/lib64/:/mnt/appimager/build/lib/i386-linux-gnu/:/mnt/appimager/build/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH',
+            'PATH': '/mnt/appimager/build/bin/:$PATH',
+            'PKG_CONFIG_PATH': '/mnt/appimager/build/lib/pkgconfig/:$PKG_CONFIG_PATH',
+            'PYTHONPATH': '/mnt/appimager/build/share/pyshared/:$PYTHONPATH',
             'XDG_DATA_DIRS': '/mnt/appimager/build/:$XDG_DATA_DIRS',
-            'QT_PLUGIN_PATH': '/mnt/appimager/build/lib/qt4/plugins:/mnt/appimager/build/lib/qt5/plugins:$QT_PLUGIN_PATH',
-            'PERLLIB': '/mnt/appimager/build/share/perl5:/mnt/appimager/build/lib/perl5:$PERLLIB',
-            'GSETTINGS_SCHEMA_DIR': '/mnt/appimager/build/share/glib-2.0/schemas:$GSETTINGS_SCHEMA_DIR'
+            'QT_PLUGIN_PATH': '/mnt/appimager/build/lib/qt4/plugins/:/mnt/appimager/build/lib/qt5/plugins/:$QT_PLUGIN_PATH',
+            'PERLLIB': '/mnt/appimager/build/share/perl5/:/mnt/appimager/build/lib/perl5/:$PERLLIB',
+            'GSETTINGS_SCHEMA_DIR': '/mnt/appimager/build/share/glib-2.0/schemas/:$GSETTINGS_SCHEMA_DIR'
         }
 
         if not 'env' in yml:
