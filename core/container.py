@@ -17,7 +17,7 @@ class Container:
     def execute(self, command):
         data_obj = data.Data()
 
-        cmd = self.docker.exec_create(self.name, '/bin/sh -c "' + data_obj.get_env_vars_string() + ' && ' + command + '"')
+        cmd = self.docker.exec_create(self.name, '/bin/sh -c "' + data_obj.get_env_vars_string(True) + ' && ' + command + '"')
         cmd_id = cmd['Id']
 
         for line in self.docker.exec_start(cmd_id, stream=True):
