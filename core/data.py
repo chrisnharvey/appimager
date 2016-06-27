@@ -101,10 +101,13 @@ class Data:
 
         return env_vars
 
-    def get_env_vars_string(self):
+    def get_env_vars_string(self, export: bool):
         env_string = ''
 
         for env, value in self.get_env_vars().items():
+            if (export):
+                env = 'export ' + env
+
             env_string = env_string + "; " + env + '="' + value + '"'
 
         return env_string.strip('; ')
