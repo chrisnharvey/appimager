@@ -83,7 +83,7 @@ class Data:
             'QT_PLUGIN_PATH': '/mnt/appimager/build/lib/qt4/plugins/:/mnt/appimager/build/lib/qt5/plugins/:$QT_PLUGIN_PATH',
             'PERLLIB': '/mnt/appimager/build/share/perl5/:/mnt/appimager/build/lib/perl5/:$PERLLIB',
             'GSETTINGS_SCHEMA_DIR': '/mnt/appimager/build/share/glib-2.0/schemas/:$GSETTINGS_SCHEMA_DIR',
-            'PKG_CONFIG_LIBDIR': '/mnt/appimager/build/lib/pkgconfig/:$PKG_CONFIG_LIBDIR',
+            # 'PKG_CONFIG_LIBDIR': '/mnt/appimager/build/lib/pkgconfig/:$PKG_CONFIG_LIBDIR',
             'CFLAGS': '-I/mnt/appimager/build/include',
             'LDFLAGS': '-L/mnt/appimager/build/lib'
         }
