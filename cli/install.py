@@ -45,4 +45,7 @@ class InstallController(CementBaseController):
 
         shutil.rmtree('build/DEBIAN')
 
+        print('Writing lock file...')
+        data_obj.write_lock_file()
+
         print("Complete")
