@@ -13,6 +13,21 @@ class Data:
     def get_path_hash(self, key=''):
         return hashlib.md5(self.get_path(key).encode('utf-8')).hexdigest()
 
+    def write_lock_file(self, data=False):
+        if not data:
+            data = self.get_yml_data()
+
+        current_data = self.get_lock_data()
+        new_data = current_data
+
+        for key, value in data.items():
+            new_data[key] = value
+
+        file_path = os.getcwd() + "/AppImage.lock"
+        lock_file = open(file_path, 'w')
+
+        yaml.dump(new_data, lock_file)
+
     def get_path(self, key=''):
         cwd = os.getcwd()
         default = cwd + "/" + key
@@ -24,6 +39,16 @@ class Data:
             return cwd + '/' + yaml_data[yaml_key]
 
         return default
+
+    def get_lock_data(self):
+        file_path = os.getcwd() + "/AppImage.lock"
+
+        if not os.path.isfile(file_path):
+            return {}
+
+        stream = open(file_path, 'r')
+
+        return yaml.load(stream)
 
     def get_yml_data(self):
         file_path = os.getcwd() + "/AppImage.yml"
