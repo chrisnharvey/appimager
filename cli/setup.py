@@ -70,4 +70,7 @@ class SetupController(CementBaseController):
         for line in container_obj.execute("apt-get install -y " + build_deps):
             print(line, end="")
 
+        print('Writing lock file...')
+        data_obj.write_lock_file()
+
         print('Setup Complete')
