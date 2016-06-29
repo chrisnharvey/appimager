@@ -58,43 +58,59 @@ class Data:
         return yaml.load(stream)
 
     def get_deps(self):
+        return self.get_yml_key('require')
+
+    def get_lock_deps(self):
+        return self.get_lock_key('require')
+
+    def get_yml_key(self, key):
         yml = self.get_yml_data()
 
-        if not 'require' in yml:
+        if not key in yml:
             return []
 
-        deps = yml['require']
+        value = yml[key]
 
-        if deps == None:
+        if value == None:
             return []
 
-        return deps
+        return value
+
+    def get_lock_key(self, key):
+        yml = self.get_lock_data()
+
+        if not key in yml:
+            return []
+
+        value = yml[key]
+
+        if value == None:
+            return []
+
+        return value
+
+    def get_deps_to_install(self):
+        return list(set(self.get_deps()) - set(self.get_lock_deps()))
+
+    def get_deps_to_remove(self):
+        matched = list(set(self.get_lock_deps()).intersection(set(self.get_deps())))
+        return list(set(self.get_lock_deps()) - set(matched))
+
+    def get_build_deps_to_remove(self):
+        matched = list(set(self.get_build_lock_deps()).intersection(set(self.get_build_deps())))
+        return list(set(self.get_build_lock_deps()) - set(matched))
+
+    def get_build_deps_to_install(self):
+        return list(set(self.get_build_deps()) - set(self.get_build_lock_deps()))
 
     def get_repositories(self):
-        yml = self.get_yml_data()
-
-        if not 'repositories' in yml:
-            return []
-
-        repos = yml['repositories']
-
-        if repos == None:
-            return []
-
-        return repos
+        return self.get_yml_key('repositories')
 
     def get_build_deps(self):
-        yml = self.get_yml_data()
+        return self.get_yml_key('require_build')
 
-        if not 'require_build' in yml:
-            return []
-
-        deps = yml['require_build']
-
-        if deps == None:
-            return []
-
-        return deps
+    def get_build_lock_deps(self):
+        return self.get_lock_key('require_build')
 
     def get_env_vars(self):
         yml = self.get_yml_data()
