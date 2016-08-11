@@ -10,7 +10,7 @@ It has the ability to manage application dependences, setup an AppDir and packag
 
 [AppImages](http://appimage.org/) are an amazing way to distribute apps on almost any Linux distribution, but the way these apps have to be packaged is a bit convoluted, requiring you to build your app on an old base system, and figure out which dependencies are *probably* part of the base system, and which should be packaged into your AppImage.
 
-AppImager is designed to help with this. It creates a Docker container with an Arch Linux base system where you can download any version of a dependency you need for your app, and extract it into your AppDir.
+AppImager is designed to help with this. It creates a Docker container with an Ubuntu base system at a version of your choice where you can download the dependencies you need for your app, and extract them into your AppDir.
 
 We do this by using an AppImage.yml file to specify the dependencies required to compile the app, and the dependencies required to run it. AppImager then reads this YAML file, downloads and decompresses the dependencies into the AppDir, then compiles and packages your app into an AppImage.
 
@@ -168,7 +168,7 @@ The ```package``` command packages the AppDir (build directory) into an AppImage
 
 ### destroy
 
-The ```destroy``` commnad stops and destroys/deletes the container for this environment.
+The ```destroy``` command stops and destroys/deletes the container for this environment.
 
 ```bash
 ./appimager destroy
