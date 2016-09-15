@@ -18,5 +18,13 @@ class BuildController(CementBaseController):
         for line in container_obj.execute('cd /mnt/appimager && ' + yml_data['build']):
             print(line, end="")
 
+        if 'integration' in yml_data.keys():
+            print('Setting up desktop integration...')
+            for line in container_obj.execute('wget -O /mnt/appimager/build/' + yml_data['integration'] + '.wrapper https://raw.githubusercontent.com/probonopd/AppImageKit/master/desktopintegration'):
+                print(line)
+
+            for line in container_obj.execute('chmod +x /mnt/appimager/build/' + yml_data['integration'] + '.wrapper'):
+                print(line)
+
         print('Configuring permissions...')
         container_obj.execute('chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build')
