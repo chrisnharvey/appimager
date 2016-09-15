@@ -28,7 +28,7 @@
 # **************************************************************************/
 
 import os, sys, subprocess, glob
-import core.xdg.IconTheme, core.xdg.DesktopEntry # apt-get install python-xdg, present on Ubuntu
+import xdg.IconTheme, xdg.DesktopEntry # apt-get install python-xdg, present on Ubuntu
 from locale import gettext as _
 
 def get_status_output(*args, **kwargs):
