@@ -38,7 +38,8 @@ class InstallController(CementBaseController):
 
         print('Decompressing dependencies...')
 
-        container_obj.execute('ls -1 /tmp/debs | while read line ; do dpkg-deb -R /tmp/debs/$line /mnt/appimager/build ; done')
+        for line in container_obj.execute('ls -1 /tmp/debs | while read line ; do dpkg-deb -R /tmp/debs/$line /mnt/appimager/build ; done'):
+            print(line)
 
         print('Configuring permissions...')
         container_obj.execute('chown -R ' + str(os.getuid()) + ':' + str(os.getgid()) + ' /mnt/appimager/build')
