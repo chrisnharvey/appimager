@@ -1,8 +1,4 @@
 *.pyc
-*.cmake
-*.a
-runtime
-Makefile
-CMakeCache.txt
-CMakeFiles
 build
+out
+work
