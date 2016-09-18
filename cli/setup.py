@@ -57,7 +57,11 @@ class SetupController(CementBaseController):
             print(line, end="")
 
         print('Installing common dependencies...')
-        for line in container_obj.execute('apt-get -y install software-properties-common python-software-properties'):
+        for line in container_obj.execute('apt-get -y install software-properties-common python-software-properties wget'):
+            print(line, end="")
+
+        print('Downloading AppImageAssistant...')
+        for line in container_obj.execute('wget -O /usr/bin/AppImageAssistant.AppImage https://github.com/probonopd/AppImageKit/releases/download/6/AppImageAssistant_6-' + data_obj.architecture() + '.AppImage && chmod +x /usr/bin/AppImageAssistant.AppImage'):
             print(line, end="")
 
         print('Adding additional APT repositories...')
