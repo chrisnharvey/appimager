@@ -61,7 +61,7 @@ class SetupController(CementBaseController):
             print(line, end="")
 
         print('Installing common dependencies...')
-        for line in container_obj.execute('apt-get -y install software-properties-common python-software-properties wget'):
+        for line in container_obj.execute('apt-get -y install software-properties-common python-software-properties wget fuse'):
             print(line, end="")
 
         print('Downloading AppImageAssistant...')
