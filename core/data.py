@@ -10,6 +10,9 @@ class Data:
     def get_out_path(self):
         return self.get_path('out')
 
+    def get_work_path(self):
+        return self.get_path('work')
+
     def get_path_hash(self, key=''):
         return hashlib.md5(self.get_path(key).encode('utf-8')).hexdigest()
 
