@@ -3,6 +3,8 @@ description: AppImager manages AppImage dependencies, assists in the creation of
 
 build: ./build.sh
 
+integration: bin/AppImager.sh
+
 base: 12.04
 
 repositories:
