@@ -5,15 +5,8 @@ build: ./build.sh
 
 base: 12.04
 
-require:
-    - xorriso
-    - zlib1g
+repositories:
+    - "ppa:fkrull/deadsnakes"
 
 require_build:
-    - libfuse-dev
-    - make
-    - cmake
-    - binutils
-    - libc6
-    - glib2.0
-    - gcc
+    - python3.5
