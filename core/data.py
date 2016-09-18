@@ -16,6 +16,15 @@ class Data:
     def get_path_hash(self, key=''):
         return hashlib.md5(self.get_path(key).encode('utf-8')).hexdigest()
 
+    def get_name(self):
+        yml_data = self.get_yml_data()
+        name = 'name'
+
+        if name in yml_data:
+            return yml_data[name]
+
+        return 'AppImage'
+
     def write_lock_file(self, data=False):
         if not data:
             data = self.get_yml_data()
