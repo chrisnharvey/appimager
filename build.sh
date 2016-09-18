@@ -7,15 +7,16 @@ tar xf /mnt/appimager/work/virtualenv.tar.gz
 cd virtualenv*
 python3.5 setup.py install
 
-virtualenv /mnt/appimager/build
+mkdir /mnt/appimager/build/usr
+virtualenv /mnt/appimager/build/usr
 
-/mnt/appimager/build/bin/pip3 install -r /mnt/appimager/cwd/requirements.txt
+/mnt/appimager/build/usr/bin/pip3 install -r /mnt/appimager/cwd/requirements.txt
 
 mkdir /mnt/appimager/build/appimager
 cp -R /mnt/appimager/cwd/core /mnt/appimager/build/appimager
 cp -R /mnt/appimager/cwd/cli /mnt/appimager/build/appimager
 cp /mnt/appimager/cwd/appimager /mnt/appimager/build/appimager/appimager
 
-cp /mnt/appimager/cwd/AppImager.sh /mnt/appimager/build/bin/AppImager.sh
+cp /mnt/appimager/cwd/AppImager.sh /mnt/appimager/build/usr/bin/AppImager.sh
 cp /mnt/appimager/cwd/Icon.png /mnt/appimager/build/Icon.png
 cp /mnt/appimager/cwd/AppImager.desktop /mnt/appimager/build/AppImager.desktop
