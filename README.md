@@ -6,6 +6,8 @@ AppImager is a CLI tool for creating and managing [AppImages](http://appimage.or
 
 It has the ability to manage application dependences, setup an AppDir and package that AppDir into an AppImage.
 
+Icon made by [Darius Dan](http://www.flaticon.com/authors/darius-dan "Darius Dan") from [www.flaticon.com](http://www.flaticon.com "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/ "Creative Commons BY 3.0")
+
 ## Why?
 
 [AppImages](http://appimage.org/) are an amazing way to distribute apps on almost any Linux distribution, but the way these apps have to be packaged is a bit convoluted, requiring you to build your app on an old base system, and figure out which dependencies are *probably* part of the base system, and which should be packaged into your AppImage.
