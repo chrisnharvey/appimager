@@ -29,11 +29,21 @@ class SetupController(CementBaseController):
         print('Pulling Ubuntu ' + str(base_os_version) + '...')
         docker.pull('ubuntu', str(base_os_version))
 
+        data_obj = data.Data()
+
         print('Creating container...')
         docker.create_container('ubuntu:' + str(base_os_version), tty=True, command="/bin/bash", name=container_name, volumes=['/mnt/appimager'],
             host_config=docker.create_host_config(privileged=True, cap_add=['SYS_ADMIN'], binds={
                 os.getcwd(): {
-                    'bind': '/mnt/appimager',
+                    'bind': '/mnt/appimager/work',
+                    'mode': 'ro',
+                },
+                data_obj.get_build_path(): {
+                    'bind': '/mnt/appimager/build',
+                    'mode': 'rw',
+                },
+                data_obj.get_out_path(): {
+                    'bind': '/mnt/appimager/out',
                     'mode': 'rw',
                 }
             }))
