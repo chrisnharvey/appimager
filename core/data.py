@@ -162,4 +162,4 @@ class Data:
         if arch == '64bit':
             return 'x86_64'
 
-        return 'i386'
+        return 'i686'
