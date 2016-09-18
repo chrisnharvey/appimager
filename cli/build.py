@@ -15,7 +15,7 @@ class BuildController(CementBaseController):
         container_obj = container.Container(container_name)
         yml_data = data_obj.get_yml_data()
 
-        for line in container_obj.execute('cd /mnt/appimager/work && ' + yml_data['build']):
+        for line in container_obj.execute('cd /mnt/appimager/cwd && ' + yml_data['build']):
             print(line, end="")
 
         if 'integration' in yml_data.keys():
