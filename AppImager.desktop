@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=AppImager
+Exec=AppImager.wrapper
+Icon=Icon.png
+Terminal=false
+Type=Application
+Categories=Development;
+Comment=AppImager manages AppImage dependencies, assists in the creation of AppDir's and creates AppImages from source code
+StartupNotify=true
