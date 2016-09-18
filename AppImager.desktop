@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=AppImager
-Exec=AppImager.wrapper
+Exec=AppImager.sh
 Icon=Icon.png
 Terminal=false
 Type=Application
